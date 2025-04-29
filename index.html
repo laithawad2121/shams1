@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Do you love me?</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom right, #ffe6f0, #ffccf2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: #d63384;
+      margin-bottom: 50px;
+    }
+
+    .buttons {
+      position: relative;
+      width: 320px;
+      height: 160px;
+    }
+
+    button {
+      position: absolute;
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+      transition: 0.2s ease-in-out;
+    }
+
+    #yes {
+      background-color: #28a745;
+      color: white;
+      top: 20px;
+      left: 30px;
+    }
+
+    #no {
+      background-color: #dc3545;
+      color: white;
+      top: 20px;
+      right: 30px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1> heba Do you love me? 💖</h1>
+
+  <div class="buttons">
+    <button id="yes" onclick="alert('I love you too! 😍')">Yes</button>
+    <button id="no">No</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('no');
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const buffer = 100;
+
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const btnX = rect.left + rect.width / 2;
+      const btnY = rect.top + rect.height / 2;
+
+      const distance = Math.hypot(mouseX - btnX, mouseY - btnY);
+
+      if (distance < buffer) {
+        let offsetX = (btnX - mouseX) * 2;
+        let offsetY = (btnY - mouseY) * 2;
+
+        let newLeft = rect.left + offsetX;
+        let newTop = rect.top + offsetY;
+
+        const maxX = window.innerWidth - rect.width;
+        const maxY = window.innerHeight - rect.height;
+
+        newLeft = Math.max(0, Math.min(newLeft, maxX));
+        newTop = Math.max(0, Math.min(newTop, maxY));
+
+        noBtn.style.left = `${newLeft}px`;
+        noBtn.style.top = `${newTop}px`;
+      }
+    });
+  </script>
+
+</body>
+</html>
